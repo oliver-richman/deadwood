@@ -19,7 +19,7 @@ mvp.md
 node_modules/
 
 # Build artifacts (will be rebuilt)
-dist/
+# dist/ - REMOVED: This conflicts with package.json "files" array
 
 # IDE files
 .vscode/
