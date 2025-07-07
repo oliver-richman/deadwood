@@ -6,7 +6,7 @@
   "directories": {
     "example": "example"
   },
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
@@ -19,14 +19,18 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/globby": "^9.1.0",
     "@types/node": "^24.0.10",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
+    "@typescript-eslint/parser": "^8.36.0",
     "eslint": "^9.0.0",
     "prettier": "^3.6.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "commander": "^14.0.0"
+    "commander": "^14.0.0",
+    "globby": "^14.1.0",
+    "ts-morph": "^26.0.0"
   }
 }
