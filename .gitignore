@@ -30,3 +30,4 @@ yarn-error.log*
 
 plan.md
 mvp.md
+*.tgz

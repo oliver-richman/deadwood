@@ -22,31 +22,31 @@ program
     const status = ora('Looking for deadwood...').start();
     const fileDiscoveryService = new FileDiscoveryService();
     const files = await fileDiscoveryService.findSourceFiles();
-    status.text = 'Parsing files...'
+    status.text = 'Parsing files...';
 
     const abstractSyntaxTreeService = new AbstractSyntaxTreeService(files);
-    abstractSyntaxTreeService.parseFiles()
-    status.text = 'Searching for unused variables...'
+    abstractSyntaxTreeService.parseFiles();
+    status.text = 'Searching for unused variables...';
     const deadVariablesFileGroup = abstractSyntaxTreeService.fetchDeadVariables();
-    const filesCount = Object.keys(deadVariablesFileGroup).length
+    const filesCount = Object.keys(deadVariablesFileGroup).length;
     const deadVariablesCount = getTotalArrayLength<FileGroup<DeadVariable[]>>(deadVariablesFileGroup);
     if (!filesCount) {
-      status.succeed('No unused variables found')
+      status.succeed('No unused variables found');
     } else {
-      status.fail(`Found ${deadVariablesCount} unused variable${deadVariablesCount === 1 ? '' : 's'} across ${filesCount} file${filesCount === 1 ? '' : 's'}:`)
+      status.fail(`Found ${deadVariablesCount} unused variable${deadVariablesCount === 1 ? '' : 's'} across ${filesCount} file${filesCount === 1 ? '' : 's'}:`);
       Object.keys(deadVariablesFileGroup).forEach(filePath => {
         console.log(chalk.bold.underline.cyan(filePath));
-        const deadVariables = deadVariablesFileGroup[filePath]
+        const deadVariables = deadVariablesFileGroup[filePath];
         deadVariables.forEach(dv => {
         console.log(
-          `${chalk.gray("  •")} ${chalk.yellowBright(dv.name)} at ${chalk.gray(`line ${dv.line}`)}`
+          `${chalk.gray('  •')} ${chalk.yellowBright(dv.name)} at ${chalk.gray(`line ${dv.line}`)}`
         );
         });
-      })
+      });
     }
 
-    console.log("");
-    console.log("\n" + chalk.red(`💀 ${filesCount} files affected, ${deadVariablesCount} unused variables found.`));
+    console.log('');
+    console.log('\n' + chalk.red(`💀 ${filesCount} files affected, ${deadVariablesCount} unused variables found.`));
 
   });
 

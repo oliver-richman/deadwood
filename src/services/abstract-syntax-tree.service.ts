@@ -1,7 +1,7 @@
-import {relative} from "path";
-import { Project, SyntaxKind } from "ts-morph";
-import { DeadVariable } from "../types/dead-variable.interface.js";
-import { FileGroup } from "../types/file-group.interface.js";
+import {relative} from 'path';
+import { Project, SyntaxKind } from 'ts-morph';
+import { DeadVariable } from '../types/dead-variable.interface.js';
+import { FileGroup } from '../types/file-group.interface.js';
 
 export class AbstractSyntaxTreeService {
     private readonly filePaths: string[];
@@ -16,7 +16,7 @@ export class AbstractSyntaxTreeService {
                 allowJs: true,
                 checkJs: false,
             },
-        })
+        });
     }
 
     public parseFiles(): void {
@@ -26,7 +26,7 @@ export class AbstractSyntaxTreeService {
     }
 
     public fetchDeadVariables(): FileGroup<DeadVariable[]> {
-        const fileGroup: FileGroup<DeadVariable[]> = {}
+        const fileGroup: FileGroup<DeadVariable[]> = {};
         for (const sourceFile of this.project.getSourceFiles()) {
             const relativePath = relative(process.cwd(), sourceFile.getFilePath());
             const variables = sourceFile.getDescendantsOfKind(SyntaxKind.VariableDeclaration);
@@ -36,30 +36,30 @@ export class AbstractSyntaxTreeService {
 
                 if (!symbol) continue;
 
-                const references = variable.findReferences()
+                const references = variable.findReferences();
                 let referenceCount = 0;
                 for (const ref of references) {
                     for (const refNode of ref.getReferences()) {
                         if (refNode.isDefinition()) continue;
-                        referenceCount++
+                        referenceCount++;
                     }
                 }
 
                 if (referenceCount === 0) {
                     if (!fileGroup[relativePath]) {
-                        fileGroup[relativePath] = []
+                        fileGroup[relativePath] = [];
                     }
-                    const line = variable.getStartLineNumber()
+                    const line = variable.getStartLineNumber();
                     const column = variable.getStartLinePos();
                     fileGroup[relativePath].push({
                         name,
                         line,
                         column,
-                    })
+                    });
                 }
             }
         }
 
-        return fileGroup
+        return fileGroup;
     }
 }
