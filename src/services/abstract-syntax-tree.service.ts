@@ -1,5 +1,7 @@
 import {relative} from "path";
 import { Project, SyntaxKind } from "ts-morph";
+import { DeadVariable } from "../types/dead-variable.interface.js";
+import { FileGroup } from "../types/file-group.interface.js";
 
 export class AbstractSyntaxTreeService {
     private readonly filePaths: string[];
@@ -24,8 +26,10 @@ export class AbstractSyntaxTreeService {
         }
     }
 
-    public fetchDeadVariables() {
+    public fetchDeadVariables(): FileGroup<DeadVariable[]> {
+        const fileGroup: FileGroup<DeadVariable[]> = {}
         for (const sourceFile of this.project.getSourceFiles()) {
+            const relativePath = relative(process.cwd(), sourceFile.getFilePath());
             const variables = sourceFile.getDescendantsOfKind(SyntaxKind.VariableDeclaration);
             for (const variable of variables) {
                 const name = variable.getName();
@@ -43,11 +47,20 @@ export class AbstractSyntaxTreeService {
                 }
 
                 if (referenceCount === 0) {
-                    const relativePath = relative(process.cwd(), sourceFile.getFilePath());
-                    const lineNumber = variable.getStartLineNumber()
-                    console.log(`${relativePath}:${lineNumber}\n - ${name}`)
+                    if (!fileGroup[relativePath]) {
+                        fileGroup[relativePath] = []
+                    }
+                    const line = variable.getStartLineNumber()
+                    const column = variable.getStartLinePos();
+                    fileGroup[relativePath].push({
+                        name,
+                        line,
+                        column,
+                    })
                 }
             }
         }
+
+        return fileGroup
     }
 }
