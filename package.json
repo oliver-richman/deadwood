@@ -1,0 +1,32 @@
+{
+  "name": "deadwood",
+  "version": "1.0.0",
+  "description": "A CLI tool for identifying and optionally removing **dead code** in TypeScript projects. Deadwood helps maintain clean and efficient codebases by detecting unused types, variables, functions, classes, imports, exports, and more.",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "dev:cli": "npm run clean && npm run build &&node dist/index.js",
+    "lint": "npx eslint . --ext .ts,.tsx,.js,.jsx --max-warnings 0",
+    "lint:fix": "npx eslint . --ext .ts,.tsx,.js,.jsx --fix",
+    "format": "prettier --write ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^24.0.10",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "commander": "^14.0.0"
+  }
+}
