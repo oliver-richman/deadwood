@@ -9,7 +9,6 @@ export class AbstractSyntaxTreeService {
 
     constructor(filePaths: string[]) {
         this.filePaths = filePaths;
-        const thing = 123;
         this.project = new Project({
             useInMemoryFileSystem: false,
             skipAddingFilesFromTsConfig: true,

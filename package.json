@@ -1,23 +1,46 @@
 {
   "name": "deadwood",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A CLI tool for identifying and optionally removing **dead code** in TypeScript projects. Deadwood helps maintain clean and efficient codebases by detecting unused types, variables, functions, classes, imports, exports, and more.",
-  "main": "index.js",
-  "directories": {
-    "example": "example"
+  "main": "dist/index.js",
+  "bin": {
+    "deadwood": "dist/index.js"
   },
+  "files": [
+    "dist/**/*",
+    "README.md"
+  ],
   "type": "module",
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist",
-    "dev:cli": "npm run clean && npm run build &&node dist/index.js",
+    "dev:cli": "npm run clean && npm run build && node dist/index.js",
     "lint": "npx eslint . --ext .ts,.tsx,.js,.jsx --max-warnings 0",
     "lint:fix": "npx eslint . --ext .ts,.tsx,.js,.jsx --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepublishOnly": "npm run clean && npm run build && npm run lint",
+    "prepack": "npm run clean && npm run build"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "dead wood",
+    "unused",
+    "unused variables",
+    "dead code",
+    "typescript",
+    "clean",
+    "linter",
+    "cli"
+  ],
+  "author": "Oliver Richman",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oliver-richman/deadwood.git"
+  },
+  "homepage": "https://github.com/oliver-richman/deadwood#readme",
+  "bugs": {
+    "url": "https://github.com/oliver-richman/deadwood/issues"
+  },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/globby": "^9.1.0",
