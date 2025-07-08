@@ -1,6 +1,6 @@
 {
   "name": "deadwood",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A CLI tool for identifying and optionally removing **dead code** in TypeScript projects. Deadwood helps maintain clean and efficient codebases by detecting unused types, variables, functions, classes, imports, exports, and more.",
   "main": "dist/index.js",
   "bin": {
