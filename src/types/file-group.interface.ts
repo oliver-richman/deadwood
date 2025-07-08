@@ -1,3 +1,3 @@
 export interface FileGroup<T> {
-    [filePath: string]: T
+  [filePath: string]: T;
 }

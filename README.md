@@ -40,7 +40,6 @@ Then run:
 npx deadwood [options]
 ```
 
-
 ## CLI Options
 
 Run `deadwood --help` for all available flags.

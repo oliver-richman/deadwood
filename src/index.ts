@@ -27,23 +27,26 @@ cliService.program.action(async () => {
   const files = await fileDiscoveryService.findSourceFiles();
 
   if (!files || !files.length) {
-    logService.stopSpinner(1, 'No source files to parse')
+    logService.stopSpinner(1, 'No source files to parse');
     return;
   } else {
-    logService.stopSpinner(0, `${files.length} source files located.`)
+    logService.stopSpinner(0, `${files.length} source files located.`);
   }
 
-  logService.startSpinner('Parsing files...')
+  logService.startSpinner('Parsing files...');
   const project = abstractSyntaxTreeService.parseFilesIntoProject(files);
   const sourceFiles = project.getSourceFiles();
-  logService.stopSpinner(0, `${sourceFiles.length} files parsed.`)
+  logService.stopSpinner(0, `${sourceFiles.length} files parsed.`);
 
-  const formattedEntitiesToSearchFor = entitiesToSearchFor.map(e => getNiceEntityType(e, false))
-  logService.startSpinner(`Finding unused ${joinWithAnd(formattedEntitiesToSearchFor)}`)
-  const deadEntityFileGroup = abstractSyntaxTreeService.findDeadEntities(project, entitiesToSearchFor);
-  logService.stopSpinner(0, `Finished finding unused ${joinWithAnd(formattedEntitiesToSearchFor)}`)
+  const formattedEntitiesToSearchFor = entitiesToSearchFor.map((e) => getNiceEntityType(e, false));
+  logService.startSpinner(`Finding unused ${joinWithAnd(formattedEntitiesToSearchFor)}`);
+  const deadEntityFileGroup = abstractSyntaxTreeService.findDeadEntities(
+    project,
+    entitiesToSearchFor
+  );
+  logService.stopSpinner(0, `Finished finding unused ${joinWithAnd(formattedEntitiesToSearchFor)}`);
 
-  logService.addEmptyLine()
+  logService.addEmptyLine();
 
   reportingService.report(deadEntityFileGroup);
 });
