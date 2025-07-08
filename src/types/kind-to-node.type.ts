@@ -1,4 +1,4 @@
-import { FunctionDeclaration, MethodDeclaration, SyntaxKind, VariableDeclaration } from "ts-morph";
+import { FunctionDeclaration, MethodDeclaration, SyntaxKind, VariableDeclaration } from 'ts-morph';
 
 export type KindToNode = {
     [SyntaxKind.VariableDeclaration]: VariableDeclaration;
