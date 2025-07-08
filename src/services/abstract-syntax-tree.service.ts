@@ -1,24 +1,14 @@
 import { relative } from 'path';
 import {
-  FunctionDeclaration,
-  MethodDeclaration,
   Node,
   Project,
   SourceFile,
   SyntaxKind,
-  VariableDeclaration,
 } from 'ts-morph';
 import { SearchableEntities } from '../types/searchable-entities.type.js';
 import { FileGroup } from '../types/file-group.interface.js';
 import { DeadEntity } from '../types/dead-entity.interface.js';
-
-// Type mapping for supported SyntaxKinds
-
-type KindToNode = {
-  [SyntaxKind.VariableDeclaration]: VariableDeclaration;
-  [SyntaxKind.FunctionDeclaration]: FunctionDeclaration;
-  [SyntaxKind.MethodDeclaration]: MethodDeclaration;
-};
+import { KindToNode } from '../types/kind-to-node.type.js';
 
 export class AbstractSyntaxTreeService {
   public parseFilesIntoProject(filePaths: string[]): Project {
