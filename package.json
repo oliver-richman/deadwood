@@ -6,6 +6,9 @@
   "bin": {
     "deadwood": "dist/index.js"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "files": [
     "dist/**/*",
     "README.md",
