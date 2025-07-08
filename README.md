@@ -1,5 +1,11 @@
 # 🪵 deadwood
 
+[![npm version](https://img.shields.io/npm/v/deadwood.svg)](https://www.npmjs.com/package/deadwood)
+[![npm downloads](https://img.shields.io/npm/dm/deadwood.svg)](https://www.npmjs.com/package/deadwood)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/oliver-richman/deadwood/release.yml?branch=main)](https://github.com/oliver-richman/deadwood/actions)
+[![license](https://img.shields.io/github/license/oliver-richman/deadwood.svg)](./LICENSE)
+
+
 A CLI tool for identifying and optionally removing **dead code** in TypeScript projects. Deadwood helps maintain clean and efficient codebases by detecting unused types, variables, functions, classes, imports, exports, and more.
 
 ## Features
